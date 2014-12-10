@@ -81,11 +81,19 @@
 		<groupId>org.apache.mina</groupId>
 		<artifactId>mina-core</artifactId>
 		<version>2.0.9</version>
+		<type>jar</type>
 	</dependency>   
     <dependency>
 		<groupId>org.apache.mina</groupId>
 		<artifactId>mina-integration-beans</artifactId>
 		<version>2.0.9</version>
+		<type>jar</type>
+		<exclusions>
+			<exclusion>
+			  <groupId>org.apache.mina</groupId>
+			  <artifactId>mina-core</artifactId>
+			</exclusion>
+		</exclusions>
 	</dependency>
        
     <!-- JMS begin -->
