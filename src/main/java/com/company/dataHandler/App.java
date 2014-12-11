@@ -1,7 +1,9 @@
-package com.company.dataHandler;
+package com.company.datahandler;
 
+import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.mina.core.service.IoAcceptor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
         System.out.println( "Hello World!" );
         ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -22,5 +24,10 @@ public class App
         for (String beanName : beanNames) {
             System.out.println(beanName);
         }
+        //IoAcceptor acceptor= (IoAcceptor) ctx.getBean("ioAcceptor");
+        //acceptor.bind();
+        while (true) {
+			
+		}
     }
 }

@@ -1,4 +1,4 @@
-package com.company.dataHandler;
+package com.company.datahandler;
 
 import org.springframework.stereotype.Component;
 

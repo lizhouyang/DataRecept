@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <!-- apache mina部分的配置 -->
+    <!-- the IoFilters -->
+	
+	<bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter"/>
+	
+	<bean id="mdcInjectionFilter" class="org.apache.mina.filter.logging.MdcInjectionFilter">
+	    <constructor-arg value="remoteAddress"/>
+	</bean>
+    
+    <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
+	    <constructor-arg>
+	      <bean class="org.apache.mina.filter.codec.textline.TextLineCodecFactory" />
+	    </constructor-arg>
+	</bean>
+	
+	<bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />
+	
+	<!-- The filter chain. -->
+	<bean id="filterChainBuilder" class="org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder">
+	  <property name="filters">
+	    <map>
+	      	<entry key="executor" value-ref="executorFilter"/>
+	        <entry key="mdcInjectionFilter" value-ref="mdcInjectionFilter"/>
+	        <entry key="codecFilter" value-ref="codecFilter"/>
+	        <entry key="loggingFilter" value-ref="loggingFilter"/>
+	    </map>
+	  </property>
+	</bean>
+	
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+	    <property name="customEditors">
+	      <map>
+	        <entry key="java.net.SocketAddress" value="org.apache.mina.integration.beans.InetSocketAddressEditor">
+	        </entry>
+	      </map>
+	    </property>
+	</bean>
+	
+	<!-- The IoAcceptor which binds to port 161 -->
+	<bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioDatagramAcceptor" init-method="bind" destroy-method="unbind">
+	  <property name="defaultLocalAddress" value=":162" />
+	  <property name="handler" ref="dataReceptHandler" />
+	  <property name="filterChainBuilder" ref="filterChainBuilder" />
+	</bean>
+	  
+	  
+</beans>
