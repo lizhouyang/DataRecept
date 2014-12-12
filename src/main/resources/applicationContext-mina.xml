@@ -45,7 +45,7 @@
 	
 	<!-- The IoAcceptor which binds to port 161 -->
 	<bean id="ioAcceptor" class="org.apache.mina.transport.socket.nio.NioDatagramAcceptor" init-method="bind" destroy-method="unbind">
-	  <property name="defaultLocalAddress" value=":162" />
+	  <property name="defaultLocalAddress" value=":7000" />
 	  <property name="handler" ref="dataReceptHandler" />
 	  <property name="filterChainBuilder" ref="filterChainBuilder" />
 	</bean>

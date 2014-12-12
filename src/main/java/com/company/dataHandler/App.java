@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import org.apache.mina.core.service.IoAcceptor;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -16,7 +17,7 @@ public class App
     public static void main( String[] args ) throws IOException
     {
         System.out.println( "Hello World!" );
-        ApplicationContext ctx=new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext ctx=getApplicationContext();
         
         System.out.println("Let's inspect the beans provided by Spring:");
         String[] beanNames = ctx.getBeanDefinitionNames();
@@ -26,8 +27,12 @@ public class App
         }
         //IoAcceptor acceptor= (IoAcceptor) ctx.getBean("ioAcceptor");
         //acceptor.bind();
+        /*
         while (true) {
 			
-		}
+		}*/
+    }
+    public static ConfigurableApplicationContext getApplicationContext() {
+        return new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 }
