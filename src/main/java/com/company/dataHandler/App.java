@@ -16,7 +16,12 @@ public class App
 {
     public static void main( String[] args ) throws IOException
     {
-        System.out.println( "Hello World!" );
+    	if (System.getProperty("com.sun.management.jmxremote") != null) {
+            System.out.println("JMX enabled.");
+        } else {
+            System.out.println("JMX disabled. Please set the "
+                  + "'com.sun.management.jmxremote' system property to enable JMX.");
+        }
         ApplicationContext ctx=getApplicationContext();
         
         System.out.println("Let's inspect the beans provided by Spring:");
@@ -25,12 +30,8 @@ public class App
         for (String beanName : beanNames) {
             System.out.println(beanName);
         }
-        //IoAcceptor acceptor= (IoAcceptor) ctx.getBean("ioAcceptor");
-        //acceptor.bind();
-        /*
-        while (true) {
-			
-		}*/
+        
+        System.out.println("Listening ...");
     }
     public static ConfigurableApplicationContext getApplicationContext() {
         return new ClassPathXmlApplicationContext("applicationContext.xml");
