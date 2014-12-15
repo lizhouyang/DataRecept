@@ -1,4 +1,4 @@
-package com.company.datahandler.mina;
+package com.company.datahandler.mina.iohandler;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
