@@ -7,7 +7,6 @@
 
     <!-- apache mina部分的配置 -->
     <!-- the IoFilters -->
-	
 	<bean id="executorFilter" class="org.apache.mina.filter.executor.ExecutorFilter"/>
 	
 	<bean id="mdcInjectionFilter" class="org.apache.mina.filter.logging.MdcInjectionFilter">
@@ -15,9 +14,7 @@
 	</bean>
     
     <bean id="codecFilter" class="org.apache.mina.filter.codec.ProtocolCodecFilter">
-	    <constructor-arg>
-	      <bean class="org.apache.mina.filter.codec.textline.TextLineCodecFactory" />
-	    </constructor-arg>
+	    <constructor-arg ref="dataCodecFactory"/>
 	</bean>
 	
 	<bean id="loggingFilter" class="org.apache.mina.filter.logging.LoggingFilter" />

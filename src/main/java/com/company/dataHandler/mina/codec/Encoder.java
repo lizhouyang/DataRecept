@@ -10,7 +10,6 @@ public class Encoder implements ProtocolEncoder {
 
 	@Override
 	public void dispose(IoSession arg0) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
